@@ -1,9 +1,16 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
+
 namespace Engeener_Projetc.Models
-{
+{   
+    [Table("tb_user")]
     public class User
-    {
-        public int Id { get; set; }
-        public string UserName { get; set; }
-        public string PasswordHash { get; set; }
+    {   
+        [Column("id")]
+        public required int Id { get; set; }
+        [Column("name")]
+        public required string UserName { get; set; }
+        [Column("password")]
+        public required string PasswordHash { get; set; }
     }
 }

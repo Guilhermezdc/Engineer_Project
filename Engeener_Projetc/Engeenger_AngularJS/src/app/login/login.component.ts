@@ -3,6 +3,8 @@ import {NgOptimizedImage} from '@angular/common';
 import {LoginService} from '../services/login.service';
 import {FormsModule, NgForm} from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import {Router} from '@angular/router';
+import {ModalerroService} from '../services/modalerro.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,9 @@ import { AuthService } from '../services/auth.service';
 
 export class LoginComponent {
   constructor(private _loginService: LoginService,
-              private authService: AuthService) {}
+              private authService: AuthService,
+              private router: Router,
+              private ModalerroService: ModalerroService) { }
 
   login: string = ``;
   password: string = ``;
@@ -29,9 +33,12 @@ export class LoginComponent {
         next: (res) =>{
           this.authService.saveToken(res.token);
           const userInfo = this.authService.getDecodedToken();
+          this.router.navigate(['/homepage']);
           console.log('Login com sucesso', userInfo);
         },
-        error: (err) => console.error('Erro no login', err),
+        error: (err) => {
+          this.ModalerroService.showError('Usuário ou senha incorretos!');
+        }
       });
     }
   }

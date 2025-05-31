@@ -1,0 +1,8 @@
+<!-- Exibe apenas se há mensagem -->
+<div *ngIf="message" class="modal-overlay">
+  <div class="modal-box">
+    <h2>Erro</h2>
+    <p>{{ message }}</p>
+    <button (click)="close()">Fechar</button>
+  </div>
+</div>
